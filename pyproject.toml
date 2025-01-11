@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "tzedek"
+version = "0.1.0"
+description = ""
+authors = ["Michael Kushner"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.4"
+aiogram = "^3.17.0"
+djangorestframework = "^3.15.2"
+psycopg2-binary = "^2.9.10"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
