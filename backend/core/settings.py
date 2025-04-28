@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "rest_framework",
 
     "apps.users.apps.UsersConfig",
+    "apps.questions.apps.QuestionsConfig",
 ]
 
 MIDDLEWARE = [

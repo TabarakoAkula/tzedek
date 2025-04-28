@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(models.Model):
-    telegram_id = models.CharField(max_length=32, verbose_name="telegram_id", unique=True)
+    telegram_id = models.CharField(max_length=32, verbose_name="telegram id", unique=True)
     username = models.CharField(blank=True, null=True, verbose_name="username", max_length=256)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="creation date")
 

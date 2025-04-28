@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView, Response
 from apps.users.serializers import UserSerializer
+from apps.questions.serializers import QuestionSerializer
 from apps.users.models import User
 
 
@@ -42,3 +43,15 @@ class UserUpdateUsernameView(APIView):
             serializer.update_username(validated_data=request.data)
             return Response({"success": True, "data": serializer.data})
         return Response({"success": False, "message": serializer.errors})
+
+
+class GetUserQuestions(APIView):
+    @staticmethod
+    def get(request, telegram_id):
+        try:
+            user = User.objects.get(telegram_id=telegram_id)
+        except User.DoesNotExist:
+            return Response({"success": False, "message": "User does not exists"})
+        questions = user.questions.all()
+        serializer = QuestionSerializer(questions, many=True)
+        return Response({"success": True, "data": serializer.data})
