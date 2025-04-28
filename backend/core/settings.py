@@ -10,6 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = str(os.getenv("DEBUG")).lower() == "true"
+API_KEY = str(os.getenv("API_KEY"))
 
 USE_POSTGRES = str(os.getenv("USE_POSTGRES")).lower() == "true"
 USE_REDIS = str(os.getenv("USE_REDIS")).lower() == "true"
@@ -20,6 +21,7 @@ INTERNAL_IPS = str(os.getenv("INTERNAL_IPS")).split(";")
 CSRF_TRUSTED_ORIGINS = str(os.getenv("CSRF_TRUSTED_ORIGINS")).split(";")
 
 INSTALLED_APPS = [
+    "unfold",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -28,8 +30,10 @@ INSTALLED_APPS = [
 
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-
     "rest_framework",
+
+    "apps.users.apps.UsersConfig",
+    "apps.questions.apps.QuestionsConfig",
 ]
 
 MIDDLEWARE = [
@@ -41,6 +45,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "core.middlewares.ApiKeyMiddleware",
 ]
 
 if DEBUG:
