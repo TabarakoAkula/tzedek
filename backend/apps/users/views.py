@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from rest_framework.views import APIView, Response
-from apps.users.serializers import UsersSerializer
-from apps.users.models import Users
+from apps.users.serializers import UserSerializer
+from apps.users.models import User
 
 
 class UserGetCreateView(APIView):
     @staticmethod
     def get(request, telegram_id: str):
         try:
-            user = Users.objects.get(telegram_id=telegram_id)
-        except Users.DoesNotExist:
+            user = User.objects.get(telegram_id=telegram_id)
+        except User.DoesNotExist:
             return Response({"success": False, "message": "User does not exists"})
-        serializer = UsersSerializer(user)
+        serializer = UserSerializer(user)
         return Response({"success": True, "data": serializer.data})
 
     @staticmethod
@@ -27,7 +27,7 @@ class UserGetCreateView(APIView):
                     "message": "Telegram ids in request and in url are different (two equals strings)",
                 }
             )
-        serializer = UsersSerializer(data=request.data)
+        serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({"success": True, "data": serializer.data})
@@ -37,7 +37,7 @@ class UserGetCreateView(APIView):
 class UserUpdateUsernameView(APIView):
     @staticmethod
     def post(request):
-        serializer = UsersSerializer(data=request.data)
+        serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.update_username(validated_data=request.data)
             return Response({"success": True, "data": serializer.data})
