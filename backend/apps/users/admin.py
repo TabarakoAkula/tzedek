@@ -1,9 +1,10 @@
 from django.contrib import admin
 from apps.users.models import User
+from unfold.admin import ModelAdmin
 
 
 @admin.register(User)
-class UsersAdmin(admin.ModelAdmin):
+class UsersAdmin(ModelAdmin):
     list_display = ("telegram_id", "username", "created_at")
     search_fields = ("telegram_id", "username")
     list_filter = ("created_at",)

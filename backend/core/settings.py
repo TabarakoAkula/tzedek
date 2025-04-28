@@ -20,6 +20,7 @@ INTERNAL_IPS = str(os.getenv("INTERNAL_IPS")).split(";")
 CSRF_TRUSTED_ORIGINS = str(os.getenv("CSRF_TRUSTED_ORIGINS")).split(";")
 
 INSTALLED_APPS = [
+    "unfold",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
