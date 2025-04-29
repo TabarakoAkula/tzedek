@@ -1,5 +1,6 @@
-from django.urls import path
 import apps.users.views as views
+from django.urls import path
+
 
 urlpatterns = [
     path("update_username", views.UserUpdateUsernameView.as_view()),

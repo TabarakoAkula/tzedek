@@ -1,6 +1,5 @@
-from django.shortcuts import render
-from rest_framework.views import APIView, Response
 from apps.questions.serializers import QuestionSerializer
+from rest_framework.views import APIView, Response
 
 
 class CreateQuestionView(APIView):

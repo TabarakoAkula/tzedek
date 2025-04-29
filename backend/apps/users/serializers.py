@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from apps.users.models import User
+from rest_framework import serializers
 
 
 class UserSerializer(serializers.Serializer):
@@ -9,7 +9,9 @@ class UserSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         if User.objects.filter(telegram_id=validated_data.get("telegram_id")).exists():
-            raise serializers.ValidationError("User with this telegram_id already exists")
+            raise serializers.ValidationError(
+                "User with this telegram_id already exists",
+            )
         user = User(
             telegram_id=validated_data.get("telegram_id"),
             username=validated_data.get("username"),
@@ -18,8 +20,12 @@ class UserSerializer(serializers.Serializer):
         return user
 
     def update_username(self, validated_data):
-        if not User.objects.filter(telegram_id=validated_data.get("telegram_id")).exists():
-            raise serializers.ValidationError("User with this telegram_id does not exists")
+        if not User.objects.filter(
+            telegram_id=validated_data.get("telegram_id"),
+        ).exists():
+            raise serializers.ValidationError(
+                "User with this telegram_id does not exists",
+            )
         user = User.objects.get(telegram_id=validated_data.get("telegram_id"))
         user.username = validated_data.get("username")
         user.save()
