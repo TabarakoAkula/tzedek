@@ -29,7 +29,7 @@ jobs:
         poetry install --only dev --no-root
     - name: Run Black
       run: |
-        black backend --check --diff --color
+        poetry run black backend --check --diff --color
     - name: Run Flake8
       run: |
-        flake8 backend --statistics --count --show-source
+        poetry run flake8 backend --statistics --count --show-source
