@@ -29,6 +29,7 @@ flake8-import-order = "^0.18.2"
 flake8-print = "^5.0.0"
 flake8-async = "^25.4.3"
 dlint = "^0.16.0"
+flake8-pyproject = "^1.2.3"
 
 [build-system]
 requires = ["poetry-core"]
