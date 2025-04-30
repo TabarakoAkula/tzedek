@@ -2,9 +2,9 @@ name: Linters
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ "*" ]
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
         pip install poetry
     - name: Install dev dependencies
       run: |
-        poetry install --only dev
+        poetry install --only dev --no-root
     - name: Run Black
       run: |
         black backend --check --diff --color
