@@ -20,6 +20,27 @@ celery = "^5.5.2"
 django-unfold = "^0.55.3"
 
 
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+flake8 = "^7.2.0"
+flake8-bugbear = "^24.12.12"
+flake8-quotes = "^3.4.0"
+flake8-import-order = "^0.18.2"
+flake8-print = "^5.0.0"
+flake8-async = "^25.4.3"
+dlint = "^0.16.0"
+flake8-pyproject = "^1.2.3"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+
+[tool.flake8]
+max-line-length = 88
+indent-size = 4
+exclude = "migrations"
+inline-quotes = '"'
+import-order-style = "google"

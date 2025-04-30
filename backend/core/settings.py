@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from os import getenv
 
 from dotenv import load_dotenv
 
@@ -27,11 +26,9 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "rest_framework",
-
     "apps.users.apps.UsersConfig",
     "apps.questions.apps.QuestionsConfig",
 ]
@@ -81,14 +78,14 @@ if USE_POSTGRES:
             "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
             "HOST": os.getenv("POSTGRES_HOST"),
             "PORT": os.getenv("POSTGRES_PORT"),
-        }
+        },
     }
 else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
-        }
+        },
     }
 
 if USE_REDIS:
@@ -96,19 +93,19 @@ if USE_REDIS:
         "default": {
             "BACKEND": "django.core.cache.backends.redis.RedisCache",
             "LOCATION": os.getenv("REDIS_DJANGO_URL"),
-        }
+        },
     }
 else:
     CACHES = {
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
             "LOCATION": "unique-snowflake",
-        }
+        },
     }
 
 if USE_CELERY:
     CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
-    CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
+    CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers.DatabaseScheduler"
     CELERY_TIMEZONE = "Asia/Jerusalem"
     CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
     CELERY_RESULT_EXTENDED = True
@@ -116,7 +113,8 @@ if USE_CELERY:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation"
+        ".UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -132,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
-    ]
+    ],
 }
 
 LANGUAGE_CODE = "en-us"

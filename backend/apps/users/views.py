@@ -1,8 +1,7 @@
-from django.shortcuts import render
-from rest_framework.views import APIView, Response
-from apps.users.serializers import UserSerializer
 from apps.questions.serializers import QuestionSerializer
 from apps.users.models import User
+from apps.users.serializers import UserSerializer
+from rest_framework.views import APIView, Response
 
 
 class UserGetCreateView(APIView):
@@ -20,13 +19,19 @@ class UserGetCreateView(APIView):
         try:
             request_telegram_id = request.data["telegram_id"]
         except KeyError:
-            return Response({"success": False, "message": "You must provide telegram_id in request body"})
+            return Response(
+                {
+                    "success": False,
+                    "message": "You must provide telegram_id in request body",
+                },
+            )
         if request_telegram_id != telegram_id:
             return Response(
                 {
                     "success": False,
-                    "message": "Telegram ids in request and in url are different (two equals strings)",
-                }
+                    "message": "Telegram ids in request and in url are"
+                    " different (two equals strings)",
+                },
             )
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
