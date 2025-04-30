@@ -593,6 +593,22 @@ flake8 = ">=3.0"
 pycodestyle = "*"
 
 [[package]]
+name = "flake8-pyproject"
+version = "1.2.3"
+description = "Flake8 plug-in loading the configuration from pyproject.toml"
+optional = false
+python-versions = ">= 3.6"
+files = [
+    {file = "flake8_pyproject-1.2.3-py3-none-any.whl", hash = "sha256:6249fe53545205af5e76837644dc80b4c10037e73a0e5db87ff562d75fb5bd4a"},
+]
+
+[package.dependencies]
+Flake8 = ">=5"
+
+[package.extras]
+dev = ["pyTest", "pyTest-cov"]
+
+[[package]]
 name = "flake8-quotes"
 version = "3.4.0"
 description = "Flake8 lint for quotes."
@@ -1625,4 +1641,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "0fa163913178052a280ea13723c96312737530eb40645d381ef1af350cf2580a"
+content-hash = "ce5e7a7db9e34fd18c0eb025061c052127162d5a9cc63b8e602f79e9775252c0"
