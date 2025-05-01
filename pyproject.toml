@@ -4,23 +4,27 @@ version = "0.1.0"
 description = ""
 authors = ["Michael Kushner"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
+python-dotenv = "^1.0.1"
+redis = "^5.2.1"
+
+[tool.poetry.group.web.dependencies]
 django = "^5.1.4"
-aiogram = "^3.17.0"
 djangorestframework = "^3.15.2"
 psycopg2-binary = "^2.9.10"
-python-dotenv = "^1.0.1"
 django-debug-toolbar = "^5.1.0"
 whitenoise = "^6.9.0"
-redis = "^5.2.1"
 django-redis = "^5.4.0"
 celery = "^5.5.2"
 django-unfold = "^0.55.3"
 
+[tool.poetry.group.bot.dependencies]
+aiogram = "^3.17.0"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.linters.dependencies]
 black = "^25.1.0"
 flake8 = "^7.2.0"
 flake8-bugbear = "^24.12.12"
@@ -30,6 +34,10 @@ flake8-print = "^5.0.0"
 flake8-async = "^25.4.3"
 dlint = "^0.16.0"
 flake8-pyproject = "^1.2.3"
+
+[tool.poetry.group.dev.dependencies]
+watchdog = "^6.0.0"
+colorama = "^0.4.6"
 
 [build-system]
 requires = ["poetry-core"]
@@ -44,3 +52,4 @@ indent-size = 4
 exclude = "migrations"
 inline-quotes = '"'
 import-order-style = "google"
+ignore = "A003"

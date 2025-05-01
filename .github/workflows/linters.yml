@@ -24,12 +24,18 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install poetry
-    - name: Install dev dependencies
+    - name: Install linters
       run: |
-        poetry install --only dev --no-root
-    - name: Run Black
+        poetry install --only linters --no-root
+    - name: Backend | Black
       run: |
         poetry run black backend --check --diff --color
-    - name: Run Flake8
+    - name: Backend | Flake8
       run: |
         poetry run flake8 backend --statistics --count --show-source
+    - name: Telegram bot | Black
+      run: |
+        poetry run black telegram_bot --check --diff --color
+    - name: Telegram bot | Flake8
+      run: |
+        poetry run flake8 telegram_bot --statistics --count --show-source
