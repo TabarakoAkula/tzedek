@@ -8,15 +8,14 @@ class UserSerializer(serializers.Serializer):
     created_at = serializers.DateTimeField(read_only=True, required=False)
 
     def create(self, validated_data):
-        if User.objects.filter(telegram_id=validated_data.get("telegram_id")).exists():
-            raise serializers.ValidationError(
-                "User with this telegram_id already exists",
+        try:
+            user = User.objects.get(telegram_id=validated_data.get("telegram_id"))
+        except User.DoesNotExist:
+            user = User(
+                telegram_id=validated_data.get("telegram_id"),
+                username=validated_data.get("username"),
             )
-        user = User(
-            telegram_id=validated_data.get("telegram_id"),
-            username=validated_data.get("username"),
-        )
-        user.save()
+            user.save()
         return user
 
     def update_username(self, validated_data):

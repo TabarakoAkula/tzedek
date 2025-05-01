@@ -23,6 +23,7 @@ django-unfold = "^0.55.3"
 
 [tool.poetry.group.bot.dependencies]
 aiogram = "^3.17.0"
+requests = "^2.32.3"
 
 [tool.poetry.group.linters.dependencies]
 black = "^25.1.0"
