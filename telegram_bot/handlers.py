@@ -63,5 +63,5 @@ async def send_question_handler(callback: CallbackQuery, state: FSMContext):
     data["author"] = str(callback.message.chat.id)
     data["message_id"] = str(callback.message.message_id)
     await utils.send_question(data)
-    await callback.message.edit_text("🔁 Wait for answer")
+    await callback.message.edit_text("🔁 Request sent")
     await state.clear()
