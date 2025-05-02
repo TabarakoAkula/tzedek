@@ -20,6 +20,17 @@ class Question(models.Model):
         verbose_name="message id",
         unique=True,
     )
+    chat_session_id = models.CharField(
+        max_length=52,
+        verbose_name="chat-session-id",
+        null=True,
+        blank=True,
+    )
+    success = models.BooleanField(
+        null=True,
+        blank=True,
+        verbose_name="success",
+    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="creation date",
