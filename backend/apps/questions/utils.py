@@ -68,12 +68,6 @@ async def ask_question(data: dict) -> dict:
     data["text"] = answer_text
     data["chat_session_id"] = chat_session_id
     if error_text:
-        send_message_func = data["send_message_func"]
-        await send_message_func(
-            settings.LOGS_GROUP_ID,
-            {
-                "message": f"Error while answering question: {error_text}",
-                "inline_reply_markup": [],
-            },
-        )
+        snitch_func = data["snitch_func"]
+        await snitch_func(f"Error in ask_question(): {error_text}")
     return data

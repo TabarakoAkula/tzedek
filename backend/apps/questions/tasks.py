@@ -1,7 +1,7 @@
 import asyncio
 
 from apps.questions.models import Question
-from apps.questions.notifier import edit_message, send_message
+from apps.questions.notifier import edit_message, logs_snitch, send_message
 from apps.questions.utils import ask_question
 from celery import shared_task
 from django.conf import settings
@@ -40,7 +40,7 @@ def manager_ask_question(data: dict) -> None:
 @shared_task()
 def celery_ask_question(data: dict) -> None:
     data["edit_message_func"] = edit_message
-    data["send_message_func"] = send_message
+    data["snitch_func"] = logs_snitch
     data["timeout"] = 1
     answer = asyncio.run(ask_question(data))
     question_obj = Question.objects.get(message_id=data["message_id"])
