@@ -40,7 +40,10 @@ async def back_to_menu_handler(callback: CallbackQuery, state: FSMContext):
 @router.callback_query(F.data == "ask_question")
 async def ask_user_question_handler(callback: CallbackQuery, state: FSMContext):
     await state.set_state(states.QuestionsStatesGroup.ask_question)
-    await callback.message.answer("ask a question:")
+    await callback.message.answer(
+        text="Ask a question:",
+        reply_markup=keyboards.back_to_menu(),
+    )
 
 
 @router.message(states.QuestionsStatesGroup.ask_question)

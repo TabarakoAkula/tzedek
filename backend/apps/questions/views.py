@@ -14,6 +14,7 @@ class CreateQuestionView(APIView):
                 {
                     "message": "✅ Request accepted",
                     "message_id": serializer.instance.message_id,
+                    "inline_reply_markup": [],
                 },
             )
             tasks.manager_ask_question(

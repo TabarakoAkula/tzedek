@@ -41,8 +41,8 @@ def manager_ask_question(data: dict) -> None:
 def celery_ask_question(data: dict) -> None:
     data["edit_message_func"] = edit_message
     data["send_message_func"] = send_message
+    data["timeout"] = 1
     answer = asyncio.run(ask_question(data))
-
     question_obj = Question.objects.get(message_id=data["message_id"])
     question_obj.answer_text = answer["text"]
     question_obj.chat_session_id = answer["chat_session_id"]
@@ -56,6 +56,20 @@ def celery_ask_question(data: dict) -> None:
             {
                 "message": answer_text,
                 "message_id": data["message_id"],
+                "inline_reply_markup": [
+                    [
+                        {
+                            "title": "🔎 Ask one more",
+                            "callback": "ask_question",
+                        },
+                    ],
+                    [
+                        {
+                            "title": "🔙 Back to menu",
+                            "callback": "back_to_menu",
+                        },
+                    ],
+                ],
             },
         ),
     )

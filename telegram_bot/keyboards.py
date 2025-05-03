@@ -37,3 +37,16 @@ def question_approve_keyboard_in() -> InlineKeyboardMarkup:
             ],
         ]
     )
+
+
+def back_to_menu() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="🔙 Back to menu",
+                    callback_data="back_to_menu",
+                ),
+            ],
+        ]
+    )
