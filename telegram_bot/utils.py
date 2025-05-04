@@ -23,7 +23,30 @@ async def create_user(data: dict) -> None:
 async def send_question(data: dict) -> None:
     await asyncio.to_thread(
         requests.post,
-        url=DOCKER_URL + "questions/",
+        url=DOCKER_URL + "questions/create_question",
         json=data,
         headers={"X-Api-Key": API_KEY},
     )
+
+
+async def get_user_questions(data: dict) -> dict:
+    data = await asyncio.to_thread(
+        requests.get,
+        url=DOCKER_URL + f"users/get_questions/{data['telegram_id']}",
+        headers={"X-Api-Key": API_KEY},
+        params={
+            "api_key": API_KEY,
+            "page": data["page_num"],
+        },
+    )
+    return data.json()
+
+
+async def get_question(question_id: str) -> dict:
+    data = await asyncio.to_thread(
+        requests.get,
+        url=DOCKER_URL + f"questions/{question_id}",
+        headers={"X-Api-Key": API_KEY},
+        params={"api_key": API_KEY},
+    )
+    return data.json()
