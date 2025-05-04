@@ -7,8 +7,10 @@ from django.conf import settings
 
 
 async def ask_question(data: dict) -> dict:
+    await asyncio.sleep(data["timeout"])
     answer_text = "Unknown error | We will fix it in near future"
     error_text = ""
+    chat_session_id = "None"
     success = False
     try:
         async with aiohttp.ClientSession() as session:
@@ -20,7 +22,6 @@ async def ask_question(data: dict) -> dict:
                 response.raise_for_status()
                 chat_session_data = await response.json()
                 chat_session_id = chat_session_data["chat_session_id"]
-                data["chat_session_id"] = chat_session_id
         payload["message"] = data["question"]
         payload["chat_session_id"] = chat_session_id
         async with aiohttp.ClientSession() as session:
@@ -30,13 +31,13 @@ async def ask_question(data: dict) -> dict:
                 json=payload,
             ) as response:
                 response.raise_for_status()
-
                 edit_message_func = data["edit_message_func"]
                 await edit_message_func(
                     data["telegram_id"],
                     {
                         "message": "KOD 200 MI VMESTE",
                         "message_id": data["message_id"],
+                        "inline_reply_markup": [],
                     },
                 )
                 buffer = b""
@@ -65,13 +66,8 @@ async def ask_question(data: dict) -> dict:
 
     data["success"] = success
     data["text"] = answer_text
+    data["chat_session_id"] = chat_session_id
     if error_text:
-        send_message_func = data["send_message_func"]
-        await send_message_func(
-            settings.LOGS_GROUP_ID,
-            {
-                "message": f"Error while answering question: {error_text}",
-            },
-        )
-    await asyncio.sleep(0.5)
+        snitch_func = data["snitch_func"]
+        await snitch_func(f"Error in ask_question(): {error_text}")
     return data
