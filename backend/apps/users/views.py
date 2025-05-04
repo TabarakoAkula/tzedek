@@ -1,6 +1,9 @@
 from apps.questions.serializers import QuestionSerializer
 from apps.users.models import User
+from apps.users.pagination import CustomPagination
 from apps.users.serializers import UserSerializer
+from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView, Response
 
 
@@ -50,13 +53,14 @@ class UserUpdateUsernameView(APIView):
         return Response({"success": False, "message": serializer.errors})
 
 
-class GetUserQuestions(APIView):
-    @staticmethod
-    def get(request, telegram_id):
+class GetUserQuestions(ListAPIView, PageNumberPagination):
+    serializer_class = QuestionSerializer
+    pagination_class = CustomPagination
+
+    def get_queryset(self):
+        telegram_id = self.kwargs.get("telegram_id")
         try:
             user = User.objects.get(telegram_id=telegram_id)
         except User.DoesNotExist:
             return Response({"success": False, "message": "User does not exists"})
-        questions = user.questions.all()
-        serializer = QuestionSerializer(questions, many=True)
-        return Response({"success": True, "data": serializer.data})
+        return user.questions.all().order_by("-created_at")
