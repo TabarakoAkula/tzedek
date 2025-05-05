@@ -2,13 +2,13 @@ import asyncio
 import json
 
 import aiohttp
-from apps.questions.constants import headers, payload
+from apps.questions.constants import headers, payload, TR_TG_TEXT
 from django.conf import settings
 
 
 async def ask_question(data: dict) -> dict:
     await asyncio.sleep(data["timeout"])
-    answer_text = "Unknown error | We will fix it in near future"
+    answer_text = TR_TG_TEXT["unknown_error"][data["language"]]
     error_text = ""
     chat_session_id = "None"
     success = False
@@ -35,7 +35,7 @@ async def ask_question(data: dict) -> dict:
                 await edit_message_func(
                     data["telegram_id"],
                     {
-                        "message": "KOD 200 MI VMESTE",
+                        "message": TR_TG_TEXT["kod_200"][data["language"]],
                         "message_id": data["message_id"],
                         "inline_reply_markup": [],
                     },

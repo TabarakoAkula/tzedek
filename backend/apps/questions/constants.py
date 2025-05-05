@@ -26,3 +26,39 @@ payload = {
 }
 
 headers = {"Content-Type": "application/json"}
+
+TR_TG_BUTTONS = {
+    "ask_question": {
+        "RU": "",
+        "EN": "🔎 Ask one more",
+        "HE": "",
+    },
+    "back_to_menu": {
+        "RU": "",
+        "EN": "🔙 Back to menu",
+        "HE": "",
+    },
+}
+
+TR_TG_TEXT = {
+    "accepted": {
+        "RU": "",
+        "EN": "✅ Request accepted",
+        "HE": "",
+    },
+    "in_work": {
+        "RU": "",
+        "EN": "🔎 Ask one more",
+        "HE": "",
+    },
+    "kod_200": {
+        "RU": "",
+        "EN": "KOD 200 MI VMESTE",
+        "HE": "",
+    },
+    "unknown_error": {
+        "RU": "",
+        "EN": "Unknown error | We will fix it in near future",
+        "HE": "",
+    },
+}
