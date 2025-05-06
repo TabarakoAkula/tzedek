@@ -162,7 +162,7 @@ async def settings_handler(callback: CallbackQuery, state: FSMContext):
     user = await utils.get_user(callback.message.chat.id)
     await callback.message.edit_text(
         text=f"{constants.TR_TEXT['language_now'][user['language']]}"
-        f"{user['language']}",
+        f"{constants.LANGUAGES[user['language']]}",
         reply_markup=keyboards.settings(language=user["language"]),
     )
 

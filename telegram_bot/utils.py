@@ -27,7 +27,10 @@ async def get_user(telegram_id: int) -> None:
         params={"api_key": API_KEY},
     )
     data = response.json()
-    data["data"]["success"] = data["success"]
+    try:
+        data["data"]["success"] = data["success"]
+    except KeyError:
+        return {"success": False}
     return data["data"]
 
 

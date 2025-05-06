@@ -29,36 +29,31 @@ headers = {"Content-Type": "application/json"}
 
 TR_TG_BUTTONS = {
     "ask_question": {
-        "RU": "",
-        "EN": "🔎 Ask one more",
-        "HE": "",
+        "RU": "🔎 Задать ещё один вопрос",
+        "EN": "🔎 Ask one more question",
+        "HE": "🔎 שאל שאלה נוספת",
     },
     "back_to_menu": {
-        "RU": "",
+        "RU": "🔙 Меню",
         "EN": "🔙 Back to menu",
-        "HE": "",
+        "HE": "🔙 תפריט",
     },
 }
 
 TR_TG_TEXT = {
     "accepted": {
-        "RU": "",
+        "RU": "✅ Запрос принят",
         "EN": "✅ Request accepted",
-        "HE": "",
-    },
-    "in_work": {
-        "RU": "",
-        "EN": "🔎 Ask one more",
-        "HE": "",
+        "HE": "✅ הבקשה התקבלה",
     },
     "kod_200": {
-        "RU": "",
-        "EN": "KOD 200 MI VMESTE",
-        "HE": "",
+        "RU": "🤖 Генерирую ответ",
+        "EN": "🤖 Generating a response",
+        "HE": "🤖 יוצר תשובה",
     },
     "unknown_error": {
-        "RU": "",
-        "EN": "Unknown error | We will fix it in near future",
-        "HE": "",
+        "RU": "😢 Неизвестная ошибка\n😉 Мы исправим её в ближайшее время",
+        "EN": "😢 Unknown error\n😉 We will fix it soon",
+        "HE": "😢 שגיאה לא ידועה\n😉 נתקן את זה בקרוב",
     },
 }
