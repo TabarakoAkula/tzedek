@@ -20,6 +20,20 @@ async def create_user(data: dict) -> None:
     )
 
 
+async def get_user(telegram_id: int) -> None:
+    response = await asyncio.to_thread(
+        requests.get,
+        url=DOCKER_URL + f"users/{telegram_id}",
+        params={"api_key": API_KEY},
+    )
+    data = response.json()
+    try:
+        data["data"]["success"] = data["success"]
+    except KeyError:
+        return {"success": False}
+    return data["data"]
+
+
 async def send_question(data: dict) -> None:
     await asyncio.to_thread(
         requests.post,
@@ -50,3 +64,12 @@ async def get_question(question_id: str) -> dict:
         params={"api_key": API_KEY},
     )
     return data.json()
+
+
+async def change_language(data: dict) -> None:
+    await asyncio.to_thread(
+        requests.post,
+        url=DOCKER_URL + "users/change_language",
+        json=data,
+        headers={"X-Api-Key": API_KEY},
+    )

@@ -64,3 +64,13 @@ class GetUserQuestions(ListAPIView, PageNumberPagination):
         except User.DoesNotExist:
             return Response({"success": False, "message": "User does not exists"})
         return user.questions.all().order_by("-created_at")
+
+
+class ChangeLanguageView(APIView):
+    @staticmethod
+    def post(request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.change_language(validated_data=request.data)
+            return Response({"success": True, "data": serializer.data})
+        return Response({"success": False, "message": serializer.errors})

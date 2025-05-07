@@ -27,12 +27,12 @@ jobs:
     - name: Install linters
       run: |
         poetry install --only linters --no-root
-    - name: Backend | Black
+    - name: Web | Black
       run: |
-        poetry run black backend --check --diff --color
-    - name: Backend | Flake8
+        poetry run black web --check --diff --color
+    - name: Web | Flake8
       run: |
-        poetry run flake8 backend --statistics --count --show-source
+        poetry run flake8 web --statistics --count --show-source
     - name: Telegram bot | Black
       run: |
         poetry run black telegram_bot --check --diff --color

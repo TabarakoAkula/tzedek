@@ -1,6 +1,13 @@
 from django.db import models
 
 
+LANGUAGES = {
+    "RU": "Russian",
+    "EN": "English",
+    "HE": "Hebrew",
+}
+
+
 class User(models.Model):
     telegram_id = models.CharField(
         max_length=32,
@@ -12,6 +19,12 @@ class User(models.Model):
         null=True,
         verbose_name="username",
         max_length=256,
+    )
+    language = models.CharField(
+        max_length=2,
+        choices=LANGUAGES,
+        verbose_name="language",
+        default="EN",
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

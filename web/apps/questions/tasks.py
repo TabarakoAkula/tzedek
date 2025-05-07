@@ -1,5 +1,6 @@
 import asyncio
 
+from apps.questions.constants import TR_TG_BUTTONS
 from apps.questions.models import Question
 from apps.questions.notifier import edit_message, logs_snitch, send_message
 from apps.questions.utils import ask_question
@@ -59,13 +60,13 @@ def celery_ask_question(data: dict) -> None:
                 "inline_reply_markup": [
                     [
                         {
-                            "title": "🔎 Ask one more",
+                            "title": TR_TG_BUTTONS["ask_question"][data["language"]],
                             "callback": "ask_question",
                         },
                     ],
                     [
                         {
-                            "title": "🔙 Back to menu",
+                            "title": TR_TG_BUTTONS["back_to_menu"][data["language"]],
                             "callback": "back_to_menu",
                         },
                     ],

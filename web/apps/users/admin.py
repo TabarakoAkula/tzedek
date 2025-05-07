@@ -5,6 +5,6 @@ from unfold.admin import ModelAdmin
 
 @admin.register(User)
 class UsersAdmin(ModelAdmin):
-    list_display = ("telegram_id", "username", "created_at")
+    list_display = ("telegram_id", "username", "language", "created_at")
     search_fields = ("telegram_id", "username")
     list_filter = ("created_at",)
