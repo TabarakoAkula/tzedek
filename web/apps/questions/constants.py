@@ -35,7 +35,7 @@ TR_TG_BUTTONS = {
     },
     "back_to_menu": {
         "RU": "🔙 Меню",
-        "EN": "🔙 Back to menu",
+        "EN": "🔙 Menu",
         "HE": "🔙 תפריט",
     },
 }
@@ -56,4 +56,10 @@ TR_TG_TEXT = {
         "EN": "😢 Unknown error\n😉 We will fix it soon",
         "HE": "😢 שגיאה לא ידועה\n😉 נתקן את זה בקרוב",
     },
+}
+
+TR_PROMPT_TEXT = {
+    "RU": "\nתשובה ברוסית",
+    "EN": "\nתשובה באנגלית",
+    "HE": "\nתשובה בעברית",
 }

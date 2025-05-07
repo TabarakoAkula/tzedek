@@ -66,6 +66,7 @@ services:
     container_name: web
     command: bash -c "cd web &&
                       python3 ./manage.py migrate &&
+                      python3 ./manage.py collectstatic --no-input &&
                       gunicorn --config gunicorn_config.py core.wsgi:application --preload"
     expose:
       - "8000"

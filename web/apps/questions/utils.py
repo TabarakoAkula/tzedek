@@ -2,8 +2,11 @@ import asyncio
 import json
 
 import aiohttp
-from apps.questions.constants import headers, payload, TR_TG_TEXT
+from apps.questions.constants import headers, payload, TR_PROMPT_TEXT, TR_TG_TEXT
 from django.conf import settings
+
+
+TRANSLATION_API_KEY = settings.TRANSLATION_API_KEY
 
 
 async def ask_question(data: dict) -> dict:
@@ -22,9 +25,22 @@ async def ask_question(data: dict) -> dict:
                 response.raise_for_status()
                 chat_session_data = await response.json()
                 chat_session_id = chat_session_data["chat_session_id"]
-        payload["message"] = data["question"]
-        payload["chat_session_id"] = chat_session_id
-        async with aiohttp.ClientSession() as session:
+
+            async with session.post(
+                "https://translation.googleapis.com/language/translate/v2",
+                params={
+                    "q": data["question"],
+                    "key": TRANSLATION_API_KEY,
+                    "target": "he",
+                    "source": data["language"].lower(),
+                },
+            ) as response:
+                tr_data = await response.json()
+                translated_text = tr_data["data"]["translations"][0]["translatedText"]
+
+            payload["message"] = translated_text + TR_PROMPT_TEXT[data["language"]]
+            payload["chat_session_id"] = chat_session_id
+
             async with session.post(
                 settings.ONYX_URL + "/api/chat/send-message",
                 headers=headers,

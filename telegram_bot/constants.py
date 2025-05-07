@@ -69,7 +69,7 @@ TR_TEXT = {
 
 TR_BUTTONS = {
     "ask_question": {
-        "RU": "🔎 Задай вопрос",
+        "RU": "🔎 Задать вопрос",
         "EN": "🔎 Ask a question",
         "HE": "🔎 שאל שאלה",
     },

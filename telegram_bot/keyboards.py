@@ -90,12 +90,15 @@ def questions_history(
                 )
             ]
         )
-    system_buttons = [
-        InlineKeyboardButton(
-            text=f"{pages_info['page_num']}/{pages_info['count'] // 5}",
-            callback_data="do_nothing",
-        ),
-    ]
+    total_pages = pages_info["count"] // 5
+    system_buttons = []
+    if total_pages != 0 and pages_info["count"] != 5:
+        system_buttons = [
+            InlineKeyboardButton(
+                text=f"{pages_info['page_num']}/{total_pages + 1}",
+                callback_data="do_nothing",
+            ),
+        ]
     if pages_info["previous"]:
         system_buttons.insert(
             0,
