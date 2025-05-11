@@ -11,6 +11,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = str(os.getenv("DEBUG")).lower() == "true"
 API_KEY = str(os.getenv("API_KEY"))
 
+TRANSLATION_API_KEY = str(os.getenv("TRANSLATION_API_KEY"))
 BOT_TOKEN = str(os.getenv("BOT_TOKEN"))
 ONYX_URL = str(os.getenv("ONYX_URL"))
 LOGS_GROUP_ID = str(os.getenv("LOGS_GROUP_ID"))
