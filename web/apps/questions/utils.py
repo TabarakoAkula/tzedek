@@ -26,17 +26,20 @@ async def ask_question(data: dict) -> dict:
                 chat_session_data = await response.json()
                 chat_session_id = chat_session_data["chat_session_id"]
 
-            async with session.post(
-                "https://translation.googleapis.com/language/translate/v2",
-                params={
-                    "q": data["question"],
-                    "key": TRANSLATION_API_KEY,
-                    "target": "he",
-                    "source": data["language"].lower(),
-                },
-            ) as response:
-                tr_data = await response.json()
-                translated_text = tr_data["data"]["translations"][0]["translatedText"]
+            translated_text = data["question"]
+            if data["language"] != "HE":
+                async with session.post(
+                    "https://translation.googleapis.com/language/translate/v2",
+                    params={
+                        "q": data["question"],
+                        "key": TRANSLATION_API_KEY,
+                        "target": "he",
+                        "source": data["language"].lower(),
+                    },
+                ) as response:
+                    tr_data = await response.json()
+                    translations = tr_data["data"]["translations"]
+                    translated_text = translations[0]["translatedText"]
 
             payload["message"] = translated_text + TR_PROMPT_TEXT[data["language"]]
             payload["chat_session_id"] = chat_session_id

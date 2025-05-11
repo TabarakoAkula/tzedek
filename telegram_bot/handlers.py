@@ -33,10 +33,13 @@ async def start_handler(message: Message, state: FSMContext):
 )
 async def choose_language_handler(callback: CallbackQuery, state: FSMContext):
     language = callback.data.split("_")[-1]
+    username = callback.message.chat.username
+    if not username:
+        username = "None"
     await utils.create_user(
         {
             "telegram_id": str(callback.message.chat.id),
-            "username": callback.message.chat.username,
+            "username": username,
             "language": language,
         },
     )

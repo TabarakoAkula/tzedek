@@ -1,4 +1,4 @@
-linters:
+lint:
 	poetry run black . --check --diff --color
 	poetry run flake8 web --statistics --count --show-source
 	poetry run flake8 telegram_bot --statistics --count --show-source
