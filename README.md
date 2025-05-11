@@ -13,35 +13,41 @@
 
 </div>
 
-Tzedek is an AI-driven platform that helps people to understand their legal and civil rights. 
+Tzedek is an AI-driven platform that helps people understand their legal and civil rights. 
 It collects and structures data from [Kol-Zchut](https://www.kolzchut.org.il/) and uses AI 
 ([Onyx](https://github.com/onyx-dot-app/onyx) + GPT) to provide clear answers in multiple languages.
-The project include open API and a [Telegram bot](https://t.me/tzedek_israel_bot) for easy and accessible legal help.
+The project includes open API and a [Telegram bot](https://t.me/tzedek_israel_bot) for easy and accessible legal help.
 
-The project currently provides answers in **English**, **Hebrew**(_עברית_) and **Russian**(_Русский_)
+The project currently provides answers in **English**, **Hebrew** (_עברית_) and **Russian** (_Русский_)
+<details>
+  <summary><b>View demo (click)</b></summary>
+    
+  https://github.com/user-attachments/assets/6c2a3cba-384f-48bc-a854-93c5dbd0253b
+> If the video doesn't work - open the desktop version of the website.
+</details>
 
 ## 🔧 Prerequisites
 
-This project integrates with the [Onyx](https://github.com/onyx-dot-app/onyx), a critical part of the 
-website's infrastructure. Follow [Documentation](https://docs.onyx.app/quickstart) to set it up.  
+This project integrates with [Onyx](https://github.com/onyx-dot-app/onyx), a critical part of the 
+website's infrastructure. Follow the [documentation](https://docs.onyx.app/quickstart) to set it up.  
 
 Onyx launch checkpoints:
 - [Clone](https://github.com/onyx-dot-app/onyx) repository
 - [Configure](https://docs.onyx.app/configuration_guide) settings
-- [Launch](https://docs.onyx.app/quickstart) by docker compose
+- [Launch](https://docs.onyx.app/quickstart) with docker compose
 
 > A web version will be available at [localhost:3000](http://localhost:3000)
 >
 
-- Open [connectors page](http://localhost:3000/admin/indexing/status) at admin panel
+- Open the [Connectors page](http://localhost:3000/admin/indexing/status) at admin panel
 - [Create](http://localhost:3000/admin/connectors/file?step=1) new "File" connector
-- Add your files (Our version use 6000+ files with pages data)
+- Add your files (Our version uses 6000+ files with pages data)
 
-Wait theirs indexing (Progress is displaying at [connectors page](http://localhost:3000/admin/indexing/status)) 
+Wait for them to be indexed (Progress is shown at [connectors page](http://localhost:3000/admin/indexing/status)) 
 and [create your own Assistant](http://localhost:3000/admin/assistants). 
 Do not forget to provide a prompt (``You are a professional lawyer...``). 
 
-> **Important: Tzedek will use the first custom assistant wich u added**
+> **Important: Tzedek will use the first custom assistant wich you added**
 >
 
 Now u can proceed to the setup of Tzedek🐦‍🔥
@@ -104,18 +110,18 @@ Tzedek provides a web admin panel, to use it:
 - Open ``/admin`` endpoint and enter your data
 
 ### 📂 Logs
-While using gunicorn (Docker compose version) it will save logs to 
-``/web/logs/`` folder. U can view ``access_log`` and ``errors_log``.
-Other logs would be in terminal / docker logs
+While using ``Gunicorn`` (Docker Compose version) logs will be saved to 
+``/web/logs/`` folder. You can view ``gunicorn_access.log`` and ``gunicorn_error.log``.
+Other logs will appear in terminal or via docker logs
 
 # Explanation of work
 
 ## User flow
 <div align="center">
-<img src="https://github.com/user-attachments/assets/d87f9e3e-07a6-41a0-b3b0-29256d9f0229" alt="userflow explanation">
+<img src="./documentation/user_flow.png" alt="userflow explanation">
 </div>
 
 ## Interaction between Tzedek and Onyx
 <div align="center">
-<img src="https://github.com/user-attachments/assets/590f6b6a-b72a-4efd-b2c6-dfa55fd989be" alt="interaction explanation" width="70%" align="center">
+<img src="./documentation/onyx_interaction.png" alt="interaction explanation" width="70%" align="center">
 </div>
