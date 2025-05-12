@@ -1,5 +1,7 @@
 from aiogram import Bot
+from aiogram.client.default import DefaultBotProperties
 from aiogram.client.session.aiohttp import AiohttpSession
+from aiogram.enums import ParseMode
 from aiogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
@@ -28,7 +30,11 @@ def build_inline_keyboard(data: list) -> InlineKeyboardMarkup:
 
 async def send_message(telegram_id: int, data: dict) -> str:
     async with AiohttpSession() as async_session:
-        notify_bot = Bot(token=BOT_TOKEN, session=async_session)
+        notify_bot = Bot(
+            token=BOT_TOKEN,
+            session=async_session,
+            default=DefaultBotProperties(parse_mode=ParseMode.MARKDOWN_V2),
+        )
         try:
             if data["inline_reply_markup"]:
                 await notify_bot.send_message(
@@ -48,7 +54,11 @@ async def send_message(telegram_id: int, data: dict) -> str:
 
 async def edit_message(telegram_id: int, data: dict) -> str:
     async with AiohttpSession() as async_session:
-        notify_bot = Bot(token=BOT_TOKEN, session=async_session)
+        notify_bot = Bot(
+            token=BOT_TOKEN,
+            session=async_session,
+            default=DefaultBotProperties(parse_mode=ParseMode.MARKDOWN_V2),
+        )
         try:
             if data["inline_reply_markup"]:
                 await notify_bot.edit_message_text(
