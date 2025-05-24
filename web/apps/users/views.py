@@ -1,4 +1,5 @@
 from apps.questions.serializers import QuestionSerializer
+from apps.users.constants import FORBIDDEN_ACCESS
 from apps.users.models import User
 from apps.users.pagination import CustomPagination
 from apps.users.serializers import UserSerializer
@@ -14,6 +15,10 @@ class UserGetCreateView(APIView):
             user = User.objects.get(telegram_id=telegram_id)
         except User.DoesNotExist:
             return Response({"success": False, "message": "User does not exists"})
+        if not user.access:
+            return Response(
+                {"success": False, "message": FORBIDDEN_ACCESS[user.language]}
+            )
         serializer = UserSerializer(user)
         return Response({"success": True, "data": serializer.data})
 

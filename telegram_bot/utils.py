@@ -30,7 +30,7 @@ async def get_user(telegram_id: int) -> None:
     try:
         data["data"]["success"] = data["success"]
     except KeyError:
-        return {"success": False}
+        return {"success": False, "message": data["message"]}
     return data["data"]
 
 
