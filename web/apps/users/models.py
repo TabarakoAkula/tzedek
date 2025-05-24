@@ -30,6 +30,10 @@ class User(models.Model):
         auto_now_add=True,
         verbose_name="creation date",
     )
+    access = models.BooleanField(
+        default=False,
+        verbose_name="access",
+    )
 
     def update_username(self, username: str):
         self.username = username

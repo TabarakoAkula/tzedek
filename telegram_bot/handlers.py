@@ -49,6 +49,9 @@ async def choose_language_handler(callback: CallbackQuery, state: FSMContext):
 async def menu_handler(message: Message, state: FSMContext, edit_message=False):
     await state.clear()
     user = await utils.get_user(message.chat.id)
+    if not user["success"]:
+        await message.answer(user["message"])
+        return
     if edit_message:
         await message.edit_text(
             text=html.italic(value=constants.TR_TEXT["menu_info"][user["language"]]),
