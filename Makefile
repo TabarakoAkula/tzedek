@@ -15,3 +15,8 @@ bot:
 devbot:
 	poetry run python telegram_bot/autoreload.py
 
+build:
+	docker compose up --build
+
+build_d:
+	docker compose up -d --build
