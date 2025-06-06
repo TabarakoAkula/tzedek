@@ -1,5 +1,6 @@
 import asyncio
 import json
+import re
 
 import aiohttp
 from apps.questions.constants import headers, payload, TR_PROMPT_TEXT, TR_TG_TEXT
@@ -84,6 +85,11 @@ async def ask_question(data: dict) -> dict:
         error_text = f"\nПроизошла непредвиденная ошибка: {e}"
 
     data["success"] = success
+    answer_text = re.sub(
+        r"[_*[\]()~>#\+\-=|{}.!]",
+        lambda x: "\\" + x.group(),
+        answer_text,
+    )
     data["text"] = answer_text
     data["chat_session_id"] = chat_session_id
     if error_text:
