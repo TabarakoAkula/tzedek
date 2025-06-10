@@ -25,7 +25,7 @@ django-unfold = "^0.55.3"
 gunicorn = "^23.0.0"
 
 [tool.poetry.group.bot.dependencies]
-requests = "^2.32.3"
+requests = "^2.32.4"
 
 [tool.poetry.group.linters.dependencies]
 black = "^25.1.0"
